@@ -1,3 +1,4 @@
+import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { WAHA_WEBHOOKS } from '@waha/structures/webhooks';
@@ -68,7 +69,8 @@ async function loadModules(): Promise<
   return [AppModulePlus, SwaggerConfiguratorPlus];
 }
 
-async function bootstrap() {
+// Create and configure NestJS application
+async function createApp(): Promise<INestApplication> {
   const version = getWAHAVersion();
   logger.info(`WAHA (WhatsApp HTTP API) - Running ${version} version...`);
   const [AppModule, SwaggerModule] = await loadModules();
@@ -102,15 +104,28 @@ async function bootstrap() {
 
   AppModule.appReady(app, logger);
   app.enableShutdownHooks();
+  
+  logger.info(VERSION, 'Environment');
+  return app;
+}
+
+// For traditional server - used in development
+async function bootstrap() {
+  const app = await createApp();
   const config = app.get(WhatsappConfigService);
   await app.listen(config.port);
   logger.info(`WhatsApp HTTP API is running on: ${await app.getUrl()}`);
-  logger.info(VERSION, 'Environment');
 }
 
-bootstrap().catch((error) => {
-  logger.error(error, `Failed to start WAHA: ${error}`);
-  // @ts-ignore
-  logger.error(error.stack);
-  process.exit(1);
-});
+// Only start server in non-serverless environments
+if (process.env.NODE_ENV !== 'vercel') {
+  bootstrap().catch((error) => {
+    logger.error(error, `Failed to start WAHA: ${error}`);
+    // @ts-ignore
+    logger.error(error.stack);
+    process.exit(1);
+  });
+}
+
+// Export for serverless use
+export default createApp;
