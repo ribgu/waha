@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "vercel-build": "yarn prebuild && nest build",
+    "vercel-build": "yarn prebuild && tsc-alias && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -89,6 +89,7 @@
     "rxjs": "^7.8.1",
     "sharp": "^0.33.4",
     "swagger-ui-express": "^4.1.4",
+    "tsc-alias": "^1.8.8",
     "ulid": "^2.3.0",
     "whatsapp-web.js": "github:devlikeapro/whatsapp-web.js#fork-main-channels",
     "write-file-atomic": "^6.0.0"

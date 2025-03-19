@@ -1,12 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { WsAdapter } from '@nestjs/platform-ws';
-import { WAHA_WEBHOOKS } from '@waha/structures/webhooks';
-import {
-  getNestJSLogLevels,
-  getPinoLogLevel,
-  getPinoTransport,
-} from '@waha/utils/logging';
 import { json, urlencoded } from 'express';
 import { Logger as NestJSPinoLogger } from 'nestjs-pino';
 import { LoggerErrorInterceptor } from 'nestjs-pino';
@@ -17,6 +11,13 @@ import { WhatsappConfigService } from './config.service';
 import { AppModuleCore } from './core/app.module.core';
 import { SwaggerConfiguratorCore } from './core/SwaggerConfiguratorCore';
 import { AllExceptionsFilter } from './nestjs/AllExceptionsFilter';
+// Alterar importações com alias @waha para caminhos relativos
+import { WAHA_WEBHOOKS } from './structures/webhooks';
+import {
+  getNestJSLogLevels,
+  getPinoLogLevel,
+  getPinoTransport,
+} from './utils/logging';
 import { getWAHAVersion, VERSION, WAHAVersion } from './version';
 
 const logger: Logger = pino({
