@@ -24,6 +24,7 @@ const logger: Logger = pino({
   transport: getPinoTransport(),
 }).child({ name: 'Bootstrap' });
 
+// Error handling for unexpected errors
 process.on('uncaughtException', (err) => {
   logger.error('Uncaught Exception:', err);
   if (err instanceof Error) {
@@ -40,6 +41,7 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 logger.info('NODE - Catching unhandled rejections and exceptions enabled');
 
+// Signal handling
 process.on('SIGINT', () => {
   logger.info('SIGINT received');
 });
@@ -48,12 +50,14 @@ process.on('SIGTERM', () => {
   logger.info('SIGTERM received');
 });
 
+// Load appropriate modules based on version
 async function loadModules(): Promise<
   [typeof AppModuleCore, typeof SwaggerConfiguratorCore]
 > {
   const version = getWAHAVersion();
 
   if (version === WAHAVersion.CORE) {
+    logger.info('Loading Core version modules');
     const { AppModuleCore } = await import('./core/app.module.core');
     const { SwaggerConfiguratorCore } = await import(
       './core/SwaggerConfiguratorCore'
@@ -61,6 +65,7 @@ async function loadModules(): Promise<
     return [AppModuleCore, SwaggerConfiguratorCore];
   }
   // Ignore if it's core version - there's no plus module
+  logger.info('Loading Plus version modules');
   // @ts-ignore
   const { AppModulePlus } = await import('./plus/app.module.plus');
   // @ts-ignore
@@ -71,42 +76,53 @@ async function loadModules(): Promise<
 
 // Create and configure NestJS application
 async function createApp(): Promise<INestApplication> {
-  const version = getWAHAVersion();
-  logger.info(`WAHA (WhatsApp HTTP API) - Running ${version} version...`);
-  const [AppModule, SwaggerModule] = await loadModules();
-  const httpsOptions = AppModule.getHttpsOptions(logger);
-  const app = await NestFactory.create(AppModule, {
-    logger: getNestJSLogLevels(),
-    httpsOptions: httpsOptions,
-    bufferLogs: true,
-    forceCloseConnections: true,
-  });
-  app.useLogger(app.get(NestJSPinoLogger));
+  try {
+    const version = getWAHAVersion();
+    logger.info(`WAHA (WhatsApp HTTP API) - Running ${version} version...`);
+    
+    const [AppModule, SwaggerModule] = await loadModules();
+    const httpsOptions = AppModule.getHttpsOptions(logger);
+    
+    // Create NestJS application
+    const app = await NestFactory.create(AppModule, {
+      logger: getNestJSLogLevels(),
+      httpsOptions: httpsOptions,
+      bufferLogs: true,
+      forceCloseConnections: true,
+    });
+    
+    // Configure logging
+    app.useLogger(app.get(NestJSPinoLogger));
+    app.useGlobalInterceptors(new LoggerErrorInterceptor());
+    app.useGlobalFilters(new AllExceptionsFilter());
+    
+    // Configure CORS and body parsing
+    app.enableCors();
+    app.use(json({ limit: '50mb' }));
+    app.use(urlencoded({ limit: '50mb', extended: false }));
+    
+    // Configure WebSockets
+    app.useWebSocketAdapter(new WsAdapter(app));
 
-  // Print original stack, not pino one
-  // https://github.com/iamolegga/nestjs-pino?tab=readme-ov-file#expose-stack-trace-and-error-class-in-err-property
-  app.useGlobalInterceptors(new LoggerErrorInterceptor());
+    // Configure Swagger documentation
+    const swaggerConfigurator = new SwaggerModule(app);
+    swaggerConfigurator.configure(WAHA_WEBHOOKS);
 
-  app.useGlobalFilters(new AllExceptionsFilter());
-  app.enableCors();
-  // Ideally, we should apply it globally.
-  // but for now we added it ValidationPipe on Controller or endpoint level
-  // app.useGlobalPipes(new ValidationPipe({ transform: true }));
-
-  // Allow to send big body - for images and attachments
-  app.use(json({ limit: '50mb' }));
-  app.use(urlencoded({ limit: '50mb', extended: false }));
-  app.useWebSocketAdapter(new WsAdapter(app));
-
-  // Configure swagger
-  const swaggerConfigurator = new SwaggerModule(app);
-  swaggerConfigurator.configure(WAHA_WEBHOOKS);
-
-  AppModule.appReady(app, logger);
-  app.enableShutdownHooks();
-  
-  logger.info(VERSION, 'Environment');
-  return app;
+    // Final app preparation
+    AppModule.appReady(app, logger);
+    app.enableShutdownHooks();
+    
+    logger.info(VERSION, 'Environment');
+    logger.info('Application successfully created and configured');
+    
+    return app;
+  } catch (error) {
+    logger.error('Failed to create application:', error);
+    if (error instanceof Error) {
+      logger.error(error.stack || 'No stack trace available');
+    }
+    throw error;
+  }
 }
 
 // For traditional server - used in development
@@ -118,13 +134,17 @@ async function bootstrap() {
 }
 
 // Only start server in non-serverless environments
-if (process.env.NODE_ENV !== 'vercel') {
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'vercel') {
+  logger.info('Starting in traditional server mode');
   bootstrap().catch((error) => {
     logger.error(error, `Failed to start WAHA: ${error}`);
-    // @ts-ignore
-    logger.error(error.stack);
+    if (error instanceof Error) {
+      logger.error(error.stack || 'No stack trace available');
+    }
     process.exit(1);
   });
+} else {
+  logger.info('Running in serverless mode - no server started');
 }
 
 // Export for serverless use

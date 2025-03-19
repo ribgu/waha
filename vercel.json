@@ -3,7 +3,11 @@
   "builds": [
     {
       "src": "src/serverless.ts",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "includeFiles": ["dist/**"]
+      }
     },
     {
       "src": "public/**/*",
@@ -37,6 +41,7 @@
     }
   ],
   "env": {
-    "NODE_ENV": "vercel"
+    "NODE_ENV": "production",
+    "LOG_LEVEL": "info"
   }
 }
