@@ -1211,6 +1211,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@codegenie/serverless-express@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "@codegenie/serverless-express@npm:3.4.1"
+  dependencies:
+    binary-case: ^1.0.0
+    type-is: ^1.6.16
+  checksum: 6a72bd3808f7e04ae236fd8414c55dbffe2f4f9b540c34b928bb6c79990c1b48c76386638c2fa97b214b40851d9e08b338fd2bd58c1f3ef32c6492af37dc14fa
+  languageName: node
+  linkType: hard
+
 "@colors/colors@npm:1.5.0":
   version: 1.5.0
   resolution: "@colors/colors@npm:1.5.0"
@@ -3055,6 +3065,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/aws-lambda@npm:*, @types/aws-lambda@npm:^8.10.147":
+  version: 8.10.147
+  resolution: "@types/aws-lambda@npm:8.10.147"
+  checksum: 697348cb9040563f072d2a77eec8aad3d9705f3e0f43c75ce8ae338c522e0bce8caffcfa0e11e51b674030d3221f776b07c257f98377375af08fe08df6e4de84
+  languageName: node
+  linkType: hard
+
+"@types/aws-serverless-express@npm:3.3.5":
+  version: 3.3.5
+  resolution: "@types/aws-serverless-express@npm:3.3.5"
+  dependencies:
+    "@types/aws-lambda": "*"
+    "@types/express": "*"
+    "@types/node": "*"
+  checksum: fcc39ca17fc6d69215a95f9f77a3aa17e0e39b8604afa8a8b57b77fbc8622514fded19277d6757bdd12d13a9689b91a837271d771181b5b88be0a55da8f61e8f
+  languageName: node
+  linkType: hard
+
 "@types/babel__core@npm:^7.1.14":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -3166,26 +3194,50 @@ __metadata:
   linkType: hard
 
 "@types/express-serve-static-core@npm:^4.17.33":
-  version: 4.19.5
-  resolution: "@types/express-serve-static-core@npm:4.19.5"
+  version: 4.19.6
+  resolution: "@types/express-serve-static-core@npm:4.19.6"
   dependencies:
     "@types/node": "*"
     "@types/qs": "*"
     "@types/range-parser": "*"
     "@types/send": "*"
-  checksum: 72076c2f8df55e89136d4343fc874050d56c0f4afd885772a8aa506b98c3f4f3ddc7dcba42295a8b931c61000234fd679aec79ef50db15f376bf37d46234939a
+  checksum: b0576eddc2d25ccdf10e68ba09598b87a4d7b2ad04a81dc847cb39fe56beb0b6a5cc017b1e00aa0060cb3b38e700384ce96d291a116a0f1e54895564a104aae9
   languageName: node
   linkType: hard
 
-"@types/express@npm:^4.17.3":
-  version: 4.17.21
-  resolution: "@types/express@npm:4.17.21"
+"@types/express-serve-static-core@npm:^5.0.0":
+  version: 5.0.6
+  resolution: "@types/express-serve-static-core@npm:5.0.6"
+  dependencies:
+    "@types/node": "*"
+    "@types/qs": "*"
+    "@types/range-parser": "*"
+    "@types/send": "*"
+  checksum: bc3ea44923da7d1ffaa29eff7cc41a2b05f7340e8879fe9ee40717859937d73bcd635fcc0f8232f66af942624cc48bff42971e9e2c4075db6afe478534245855
+  languageName: node
+  linkType: hard
+
+"@types/express@npm:*":
+  version: 5.0.0
+  resolution: "@types/express@npm:5.0.0"
+  dependencies:
+    "@types/body-parser": "*"
+    "@types/express-serve-static-core": ^5.0.0
+    "@types/qs": "*"
+    "@types/serve-static": "*"
+  checksum: ef68d8e2b7593c930093b1e79bf4df15413773508c9acd6a1a933ed7017f2a4892a8d128b2222d7eab9a3fa43181067a378c2600d9258bd7ae917f170e962df4
+  languageName: node
+  linkType: hard
+
+"@types/express@npm:4.17.17":
+  version: 4.17.17
+  resolution: "@types/express@npm:4.17.17"
   dependencies:
     "@types/body-parser": "*"
     "@types/express-serve-static-core": ^4.17.33
     "@types/qs": "*"
     "@types/serve-static": "*"
-  checksum: fb238298630370a7392c7abdc80f495ae6c716723e114705d7e3fb67e3850b3859bbfd29391463a3fb8c0b32051847935933d99e719c0478710f8098ee7091c5
+  checksum: 0196dacc275ac3ce89d7364885cb08e7fb61f53ca101f65886dbf1daf9b7eb05c0943e2e4bbd01b0cc5e50f37e0eea7e4cbe97d0304094411ac73e1b7998f4da
   languageName: node
   linkType: hard
 
@@ -3655,6 +3707,17 @@ __metadata:
     "@typescript-eslint/types": 7.18.0
     eslint-visitor-keys: ^3.4.3
   checksum: 6e806a7cdb424c5498ea187a5a11d0fef7e4602a631be413e7d521e5aec1ab46ba00c76cfb18020adaa0a8c9802354a163bfa0deb74baa7d555526c7517bb158
+  languageName: node
+  linkType: hard
+
+"@vendia/serverless-express@npm:^3.4.0":
+  version: 3.4.1
+  resolution: "@vendia/serverless-express@npm:3.4.1"
+  dependencies:
+    "@codegenie/serverless-express": ^3.4.1
+    binary-case: ^1.0.0
+    type-is: ^1.6.16
+  checksum: c629f555c201d3ea3d3518dbecd815c5a94ff625d58ccc92a1ee783538d9955dbfef4a50fee69643180f3c7ed9047b57b5c75c3aa7bd240aaa999f38ca448a26
   languageName: node
   linkType: hard
 
@@ -4418,6 +4481,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"aws-serverless-express@npm:3.4.0":
+  version: 3.4.0
+  resolution: "aws-serverless-express@npm:3.4.0"
+  dependencies:
+    "@vendia/serverless-express": ^3.4.0
+    binary-case: ^1.0.0
+    type-is: ^1.6.16
+  checksum: f2d7e4f7db4f82ecca38e70640154af854ad27b2af9d2104784bf3f3b8a20f6b77b306d960027b936aef00cfb3683a601e3c29b9a6468036961ccd2b470656c6
+  languageName: node
+  linkType: hard
+
 "axios-retry@npm:^4.5.0":
   version: 4.5.0
   resolution: "axios-retry@npm:4.5.0"
@@ -4636,6 +4710,13 @@ __metadata:
   version: 5.2.2
   resolution: "big.js@npm:5.2.2"
   checksum: b89b6e8419b097a8fb4ed2399a1931a68c612bce3cfd5ca8c214b2d017531191070f990598de2fc6f3f993d91c0f08aa82697717f6b3b8732c9731866d233c9e
+  languageName: node
+  linkType: hard
+
+"binary-case@npm:^1.0.0":
+  version: 1.1.4
+  resolution: "binary-case@npm:1.1.4"
+  checksum: e3b7e5375ebd9c1f127d12d0831480310d75021c97d43955034e179ea40b9120c4f81a3de5767431f27bd7cc75e2ebc3d5352f56d8326d94873a77af21416580
   languageName: node
   linkType: hard
 
@@ -5371,6 +5452,13 @@ __metadata:
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
   checksum: ab8c07884e42c3a8dbc5dd9592c606176c7eb5c1ca5ff274bcf907039b2c41de3626f684ea75ccf4d361ba004bbaff1f577d5384c155f3871e456bdf27becf9e
+  languageName: node
+  linkType: hard
+
+"commander@npm:^9.0.0":
+  version: 9.5.0
+  resolution: "commander@npm:9.5.0"
+  checksum: c7a3e27aa59e913b54a1bafd366b88650bc41d6651f0cbe258d4ff09d43d6a7394232a4dadd0bf518b3e696fdf595db1028a0d82c785b88bd61f8a440cecfade
   languageName: node
   linkType: hard
 
@@ -7341,7 +7429,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:^11.0.1, globby@npm:^11.1.0":
+"globby@npm:^11.0.1, globby@npm:^11.0.4, globby@npm:^11.1.0":
   version: 11.1.0
   resolution: "globby@npm:11.1.0"
   dependencies:
@@ -9469,6 +9557,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mylas@npm:^2.1.9":
+  version: 2.1.13
+  resolution: "mylas@npm:2.1.13"
+  checksum: f861d092137a9ac268cba88042392a5dc2a290eed5c8543954eae849d85e5961332211161d2c08c3644ad893f20dbe9de89b07f5dc027f1f92f13f2d38f4b81f
+  languageName: node
+  linkType: hard
+
 "napi-build-utils@npm:^1.0.1":
   version: 1.0.2
   resolution: "napi-build-utils@npm:1.0.2"
@@ -10338,6 +10433,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"plimit-lit@npm:^1.2.6":
+  version: 1.6.1
+  resolution: "plimit-lit@npm:1.6.1"
+  dependencies:
+    queue-lit: ^1.5.1
+  checksum: 5f18f1ea7254832bdc663c303420c804b5bc8070c670c88161171f0ebacaf46ce7ca12147ddf52bc22d927bb37bfbac6ed6fa478c93cb4be16b62c5fad16dd5f
+  languageName: node
+  linkType: hard
+
 "pluralize@npm:8.0.0":
   version: 8.0.0
   resolution: "pluralize@npm:8.0.0"
@@ -10761,6 +10865,13 @@ __metadata:
   version: 0.2.0
   resolution: "querystring@npm:0.2.0"
   checksum: 8258d6734f19be27e93f601758858c299bdebe71147909e367101ba459b95446fbe5b975bf9beb76390156a592b6f4ac3a68b6087cea165c259705b8b4e56a69
+  languageName: node
+  linkType: hard
+
+"queue-lit@npm:^1.5.1":
+  version: 1.5.2
+  resolution: "queue-lit@npm:1.5.2"
+  checksum: 8dd45c79bd25b33b0c7d587391eb0b4acc4deb797bf92fef62b2d8e7c03b64083f5304f09d52a18267d34d020cc67ccde97a88185b67590eeccb194938ff1f98
   languageName: node
   linkType: hard
 
@@ -12329,6 +12440,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tsc-alias@npm:^1.8.11":
+  version: 1.8.11
+  resolution: "tsc-alias@npm:1.8.11"
+  dependencies:
+    chokidar: ^3.5.3
+    commander: ^9.0.0
+    globby: ^11.0.4
+    mylas: ^2.1.9
+    normalize-path: ^3.0.0
+    plimit-lit: ^1.2.6
+  bin:
+    tsc-alias: dist/bin/index.js
+  checksum: 58a26db082ba07103b0f7c2e835fc182b627fa867b39eb35344cd704992805ce8383603d4de32a464c46d02ab7ba7b25c6aa1a9f862e4214a73488cc786443ff
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths-webpack-plugin@npm:4.0.1":
   version: 4.0.1
   resolution: "tsconfig-paths-webpack-plugin@npm:4.0.1"
@@ -12340,7 +12467,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths@npm:4.2.0, tsconfig-paths@npm:^4.1.0, tsconfig-paths@npm:^4.1.2":
+"tsconfig-paths@npm:4.2.0, tsconfig-paths@npm:^4.1.2, tsconfig-paths@npm:^4.2.0":
   version: 4.2.0
   resolution: "tsconfig-paths@npm:4.2.0"
   dependencies:
@@ -12441,7 +12568,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-is@npm:^1.6.4, type-is@npm:~1.6.18":
+"type-is@npm:^1.6.16, type-is@npm:^1.6.4, type-is@npm:~1.6.18":
   version: 1.6.18
   resolution: "type-is@npm:1.6.18"
   dependencies:
@@ -12769,8 +12896,10 @@ __metadata:
     "@nestjs/terminus": ^10.2.3
     "@nestjs/testing": ^9.0.9
     "@nestjs/websockets": ^9.0.9
+    "@types/aws-lambda": ^8.10.147
+    "@types/aws-serverless-express": 3.3.5
     "@types/better-sqlite3": ^7.6.10
-    "@types/express": ^4.17.3
+    "@types/express": 4.17.17
     "@types/jest": 26.0.10
     "@types/lodash": ^4.14.194
     "@types/node": ^18.14.2
@@ -12781,6 +12910,7 @@ __metadata:
     adm-zip: 0.5.10
     agentkeepalive: ^4.5.0
     async-lock: ^1.4.1
+    aws-serverless-express: 3.4.0
     axios: ^1.7.7
     axios-retry: ^4.5.0
     better-sqlite3: 11.3.0
@@ -12794,6 +12924,7 @@ __metadata:
     eslint-config-prettier: ^6.10.0
     eslint-plugin-import: ^2.20.1
     eslint-plugin-simple-import-sort: ^10.0.0
+    express: 4.18.2
     express-basic-auth: ^1.2.1
     file-type: 16.5.4
     fs-extra: ^11.2.0
@@ -12831,7 +12962,8 @@ __metadata:
     ts-jest: ^29.1.3
     ts-loader: ^6.2.1
     ts-node: ^10.9.1
-    tsconfig-paths: ^4.1.0
+    tsc-alias: ^1.8.11
+    tsconfig-paths: ^4.2.0
     typescript: ^4.8.4
     ulid: ^2.3.0
     whatsapp-web.js: "github:devlikeapro/whatsapp-web.js#fork-main-channels"

@@ -1,0 +1,48 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/serverless.ts",
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "includeFiles": ["dist/**", "src/**"],
+        "buildCommand": "yarn vercel-build"
+      }
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/docs(.*)",
+      "dest": "src/serverless.ts"
+    },
+    {
+      "src": "/api(.*)",
+      "dest": "src/serverless.ts"
+    },
+    {
+      "src": "/dashboard(.*)",
+      "dest": "src/serverless.ts"
+    },
+    {
+      "src": "/webhooks(.*)",
+      "dest": "src/serverless.ts"
+    },
+    {
+      "src": "/socket.io(.*)",
+      "dest": "src/serverless.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "src/serverless.ts"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "LOG_LEVEL": "info"
+  }
+}
